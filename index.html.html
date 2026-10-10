@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paquete de contenido · @moffadas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap">
+<style>
+:root{--bg:#F2F5F1;--card:#fff;--ink:#0F1C14;--mute:#5B6B60;--line:#D9E1D9;--g:#0E9F4B;--gd:#0A6B33;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C130F;--card:#151F18;--ink:#EAF2EB;--mute:#93A598;--line:#26352B;--g:#2FD16E;--gd:#2FD16E}}
+:root[data-theme="dark"]{--bg:#0C130F;--card:#151F18;--ink:#EAF2EB;--mute:#93A598;--line:#26352B;--g:#2FD16E;--gd:#2FD16E}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 Barlow,system-ui,sans-serif}
+main{max-width:1100px;margin:0 auto;padding:28px 18px 60px}
+h1{font:700 clamp(38px,7vw,64px)/.95 "Barlow Condensed",Impact,sans-serif;margin:0 0 8px}
+.sub{color:var(--mute);max-width:64ch;margin:0 0 18px}
+.style{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:16px}
+.style h3{font:700 22px "Barlow Condensed",sans-serif;margin:0 0 6px}
+.style ul{margin:0;padding-left:18px;font-size:15px}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:4px;border:1px solid var(--line)}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+.cnt{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:8px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:5px 12px;border-radius:20px;font:500 14px Barlow,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+h2{font:700 28px "Barlow Condensed",sans-serif;margin:28px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:6px;padding:12px}
+.card.reel{border-width:1px 1px 1px 10px}
+.card.done{opacity:.5}.card.done .t{text-decoration:line-through}
+.top{display:flex;justify-content:space-between;font-size:14px;color:var(--mute)}
+.fmt{font-weight:500;color:var(--ink)}
+.sv{font-size:13px;color:var(--c);font-weight:500}
+.t{font:700 21px/1.1 "Barlow Condensed",sans-serif;margin:6px 0 8px}
+label.ck{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--g)}
+details{margin-top:8px;font-size:15px}
+summary{cursor:pointer;color:var(--gd);font-weight:500}
+details p{margin:6px 0}
+.hide{display:none}
+button.reset{margin-top:18px;background:none;border:1px solid var(--line);color:var(--mute);padding:6px 12px;border-radius:6px;cursor:pointer;font:inherit}
+</style>
+</head>
+<body>
+<main>
+<h1>Paquete de contenido<br>12 oct – 12 nov</h1>
+<p class="sub">21 piezas para vender los 4 servicios de Moffadas: gestión de redes, Ads, Bots, y grabar y editar. Son 5 reels en motion graphic, 8 posts y 8 historias.</p>
+<div class="style"><h3>Guía de estilo para los reels</h3>
+<ul>
+<li><span class="sw" style="background:#000"></span><span class="sw" style="background:#1FE06B"></span><span class="sw" style="background:#fff"></span>Fondo negro o verde oscuro, verde neón para la palabra clave y blanco para el resto.</li>
+<li>Titulares gruesos y condensados, que entran con golpes de texto (palabra por palabra) al ritmo de la música.</li>
+<li>El robot verde como mascota, íconos de WhatsApp e Instagram, gráficas y burbujas de chat animadas.</li>
+<li>Duración de 20 a 30 s, gancho en los primeros 3 s, subtítulos siempre, formato 9:16 y cierre con el logo moffadas.</li></ul></div>
+<div class="bar">
+<div class="cnt" id="cnt"></div>
+<div class="chips" id="cf"></div>
+<div class="chips" id="sf"></div>
+</div>
+<div id="weeks"></div>
+<button class="reset" id="reset">Reiniciar marcas</button>
+</main>
+<script>
+var SV={g:["Gestión de redes","#3A6FD8"],a:["Ads","#D23B3B"],b:["Bots","#0E9F4B"],v:["Grabar y editar","#7A4FC4"]};
+var FM={Reel:8,Post:8,Historia:8};var TOT={Reel:5,Post:8,Historia:8};
+// [día, formato, servicio, título, gancho, estructura, cierre, motion]
+var I=[
+[0,"Post","g","Moffadas Solutions Media: 4 servicios, un solo equipo","Tu negocio publica, ¿pero vende?","Una pieza con los 4 servicios en 4 bloques: gestión, Ads, Bots y video. Una línea por servicio.","Escríbenos por DM “PAQUETE”."],
+[1,"Historia","g","Encuesta: ¿quién maneja tus redes?","Opciones: yo mismo, un familiar, un equipo, nadie.","Fondo verde, la pregunta grande y el sticker de encuesta. Responde con una segunda historia.","Desliza y cuéntanos."],
+[2,"Reel","g","Publicas, pero ¿vendes?","Tu negocio publica todos los días… ¿y las ventas?","Tres golpes de texto: “publicar ≠ vender”, luego un gráfico que sube con estrategia y calendario, y al final el logo.","Agenda tu diagnóstico, link en bio.","Texto cinético, íconos de calendario y gráfico animado, y transición con barrido verde."],
+[3,"Historia","v","Bastidores de una grabación","Así grabamos para una marca.","Tres clips cortos: el set, la cámara y el cliente. Usa el destacado “Producción”.","Pregunta: ¿quieres que grabemos tu negocio?"],
+[4,"Post","g","Qué incluye gestionar tus redes","No es solo subir fotos.","Carrusel de 6 slides: estrategia, calendario, diseño, video, respuestas y reporte.","Guárdalo y compártelo con tu equipo."],
+[7,"Historia","a","Caja de preguntas: ¿cuánto invertir en anuncios?","Pregúntame lo que quieras sobre Ads.","Sticker de preguntas con fondo negro. Elige 3 y respóndelas el mismo día.","Escríbenos “ADS” para una revisión."],
+[8,"Post","a","Checklist antes de anunciar","No pagues anuncios sin revisar esto.","Carrusel de 7 puntos: perfil, oferta, destino del clic, mensajes, pixel, presupuesto y seguimiento.","Guárdalo antes de tu próxima campaña."],
+[9,"Reel","a","Anuncios que se pagan solos","Gastar en anuncios no es lo mismo que invertir.","Una moneda se convierte en gráfica, luego un embudo animado (anuncio → mensaje → venta) y el contador de resultados sube.","Pide tu estrategia de Ads, link en bio.","Embudo animado, contador numérico y brillos verdes."],
+[10,"Historia","b","Demo del bot en 3 historias","Mira cómo responde en segundos.","Historia 1: cliente escribe. 2: el bot responde con el menú. 3: se concreta la venta. Usa capturas reales.","Escribe “BOT” para verlo en tu negocio."],
+[11,"Post","b","Automatiza tus ventas","Responde en segundos, sin perder clientes.","Pieza estática con el robot, íconos de WhatsApp e Instagram y 3 beneficios.","Escríbenos por DM “BOT”."],
+[14,"Historia","a","Mito o verdad: más inversión, más ventas","Responde con un sticker de tarjeta deslizante.","Tres afirmaciones sobre Ads y la respuesta corta en la siguiente historia.","Dudas: escríbenos."],
+[15,"Post","b","5 mensajes que tu bot debe enviar","Tu bot habla mal y tú no lo sabes.","Carrusel: bienvenida, menú, seguimiento, cierre y reactivación, con ejemplos para copiar.","Guárdalo y revísalo en tu negocio."],
+[16,"Reel","b","Tu vendedor que no duerme","Son las 3 a. m. y alguien quiere comprar.","El robot despierta a la pantalla, aparecen burbujas de chat que se responden solas, un reloj acelerado y el contador de ventas sube.","Automatiza tu negocio, link en bio.","Robot verde animado, burbujas de chat, reloj acelerado y glitch suave."],
+[18,"Historia","v","Bastidores de edición","Un reel, de crudo a final.","Timelapse de la edición con la pantalla del programa y la música.","¿Te editamos tus videos? DM."],
+[19,"Post","v","3 errores que matan tu video","Nadie vio tu video hasta el final.","Carrusel: gancho débil, ritmo lento y sin subtítulos. Cada uno con su corrección.","Guárdalo antes de tu próxima grabación."],
+[22,"Historia","b","Resultado de un bot real","Mira lo que logró este cliente.","Captura de mensajes respondidos o ventas, con la cifra en grande y mensaje de cierre.","Escríbenos “BOT”."],
+[23,"Reel","v","De idea a reel en 4 pasos","¿Cómo se hace un reel profesional?","Línea de tiempo animada: guion → grabación → edición → publicación, con un clip rápido por paso, estilo “hazme un videito”.","Cotiza tu video, link en bio.","Línea de tiempo animada, íconos de cada paso y cortes rápidos."],
+[25,"Post","g","Antes y después de un perfil","Mismo negocio, nuevo orden.","Pantalla dividida con el feed, la bio y los destacados antes y después, más una cifra clave.","Pide tu diagnóstico por DM."],
+[29,"Historia","g","Cuenta regresiva: cupos del paquete","Quedan pocos cupos.","Sticker de cuenta regresiva hasta el 12 de nov y una línea con lo que incluye el paquete.","Toca y escríbenos."],
+[30,"Reel","g","Todo en un solo equipo","Gestión, Ads, Bots y video, juntos.","Cuatro iconos entran uno por uno, se conectan en un círculo y el robot cierra con el logo y la oferta.","Reserva tu paquete, link en bio.","Cuatro íconos con conexión animada, el robot y cierre con logo."],
+[31,"Post","g","Último día: paquete de contenido","Cierre del mes: cupos finales.","Pieza con fecha límite, qué incluye (gestión, Ads, Bots y video) y botón de contacto.","Escríbenos antes de que cierre."]
+];
+var S={};try{S=JSON.parse(localStorage.getItem("moff2")||"{}")}catch(e){}
+function save(){try{localStorage.setItem("moff2",JSON.stringify(S))}catch(e){}}
+var af="all",as="all",dm=new Intl.DateTimeFormat("es",{weekday:"short",day:"numeric",month:"short"});
+var cf=document.getElementById("cf"),sf=document.getElementById("sf");
+function chip(box,k,l,c,fn){var b=document.createElement("button");b.className="chip";b.innerHTML=(c?'<i style="background:'+c+'"></i>':"")+l;b.dataset.k=k;b.onclick=function(){fn(k);draw()};box.appendChild(b)}
+chip(cf,"all","Todos los formatos",0,function(k){af=k});
+["Reel","Post","Historia"].forEach(function(f){chip(cf,f,f==="Historia"?"Historias":f+"s",0,function(k){af=k})});
+chip(sf,"all","Todos los servicios",0,function(k){as=k});
+for(var k in SV)chip(sf,k,SV[k][0],SV[k][1],function(k){as=k});
+function wk(d){return Math.floor(d/7)}
+var WN=["12 – 18 oct","19 – 25 oct","26 oct – 1 nov","2 – 8 nov","9 – 12 nov"];
+function draw(){
+[].forEach.call(cf.children,function(b){b.setAttribute("aria-pressed",b.dataset.k===af)});
+[].forEach.call(sf.children,function(b){b.setAttribute("aria-pressed",b.dataset.k===as)});
+var done={Reel:0,Post:0,Historia:0},h="",cur=-1;
+I.forEach(function(p,i){
+var ok=!!S[i];if(ok)done[p[1]]++;
+if(wk(p[0])!==cur){if(cur>=0)h+="</div>";cur=wk(p[0]);h+='<h2>Semana '+(cur+1)+' · '+WN[cur]+'</h2><div class="grid">'}
+var hide=(af!=="all"&&af!==p[1])||(as!=="all"&&as!==p[2])?" hide":"";
+var d=new Date(2026,9,12+p[0]);
+h+='<div class="card'+(p[1]==="Reel"?" reel":"")+(ok?" done":"")+hide+'" style="--c:'+SV[p[2]][1]+'"><div class="top"><span>'+dm.format(d)+'</span><span class="fmt">'+p[1]+(p[1]==="Reel"?" motion":"")+'</span></div><div class="sv">'+SV[p[2]][0]+'</div><div class="t">'+p[3]+'</div><label class="ck"><input type="checkbox" data-i="'+i+'"'+(ok?" checked":"")+'> Publicado</label><details><summary>Ver idea</summary><p><b>Gancho:</b> '+p[4]+'</p><p><b>Estructura:</b> '+p[5]+'</p>'+(p[7]?'<p><b>Motion:</b> '+p[7]+'</p>':"")+'<p><b>Cierre:</b> '+p[6]+'</p></details></div>';
+});
+document.getElementById("weeks").innerHTML=h+"</div>";
+document.getElementById("cnt").innerHTML=["Reel","Post","Historia"].map(function(f){return "<span>"+(f==="Historia"?"Historias":f+"s")+": "+done[f]+" de "+TOT[f]+"</span>"}).join("");
+}
+document.getElementById("weeks").addEventListener("change",function(e){var i=e.target.dataset.i;if(i!==undefined){S[i]=e.target.checked;save();draw()}});
+document.getElementById("reset").onclick=function(){S={};save();draw()};
+draw();
+</script>
+</body>
+</html>
